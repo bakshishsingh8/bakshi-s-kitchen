@@ -1,0 +1,110 @@
+/* /////////////////////////////////////////////// */
+
+  .side-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  height: 500px;
+  /* margin-bottom: -80px; */
+  background-image: url('https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1581442353249-5YKSPLFWQQHQCA055MHY/Restaurant-Food-Pics.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+  margin-top: 80px;
+}
+
+/* Add a dark overlay for better text visibility */
+.side-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  /* z-index: 1; */
+}
+
+.text {
+  flex: 1;
+  position: relative;
+  z-index: 2; /* Ensure text is above overlay */
+  padding-left: 60px;
+  color: white;
+  max-width: 600px;
+  flex: 1; 
+  font-size: 1.4rem;
+  padding-left: 20px;
+margin-top: -80px;
+margin-left: 60px;
+  animation: fadeInLeft 1s ease-in-out;
+}
+
+.text h1 {
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.text p {
+  font-size: 1.6rem;
+  color: #d1e8e2;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+.text button {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: white;
+  font-size: 1.2rem;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.text button:hover {
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+  transform: scale(1.05);
+}
+
+/* Add optional image section styling if you include image element */
+.img-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.img-section img {
+  max-width: 400px;
+  width: 90%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for text entrance */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
