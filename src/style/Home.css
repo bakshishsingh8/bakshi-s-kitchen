@@ -14,7 +14,7 @@
   background-repeat: no-repeat;
   border-radius: 0 0 10px 10px;
   overflow: hidden;
-  margin-top: 80px;
+  margin-top: -10px;
 }
 
 /* Add a dark overlay for better text visibility */
@@ -85,6 +85,7 @@ margin-left: 60px;
   align-items: center;
   position: relative;
   z-index: 2;
+  
 }
 
 .img-section img {

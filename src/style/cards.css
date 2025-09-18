@@ -2,24 +2,22 @@
     margin-top: -60px;
     border-radius: 12px;
     
-    /* padding-top: 25px; */
     
 }
 
 .cards-container {
-       /* background: linear-gradient(135deg, #ffecd2, #fcb69f); */
     display: flex;
     flex-wrap: wrap;
     background-color: #1e2228;
     
-    gap: 100px;
+    gap: 2px;
+    row-gap: 60px;
     justify-content: space-evenly;
     align-items: center;
     cursor: pointer;
  animation: fadeInDown 1s ease-in-out; 
- /* background: rgba(129, 126, 126, 0.5);  */
   z-index: 1;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
 
 @keyframes fadeInDown {
@@ -146,8 +144,6 @@ body {
 
 /* Page wrapper */
 .cards-main{
-  /* width: min(1100px, 92vw); */
-  /* margin: 28px auto 80px; */
   padding: 6px;
 }
 
@@ -209,8 +205,6 @@ margin-top: 30px;
 
 .back-btn{
   color: white;
-  /* margin-top: 25px; */
-  /* margin-bottom: 20px; */
   margin-left: 45px;
   background-color: rgb(62, 61, 61);
 }

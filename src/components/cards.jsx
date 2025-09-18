@@ -1,6 +1,5 @@
 import '../style/cards.css';
 import {Link} from 'react-router-dom';
-// import Fast-food from 'https://thumbs.dreamstime.com/b/low-angle-photo-fast-food-items-delicious-inviting-photography-374125010.jpg';
 export default function Cards() {
   return (
     <div className="cards-main">
