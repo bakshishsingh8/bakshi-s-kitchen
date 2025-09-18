@@ -1,0 +1,67 @@
+.cart-toggle {
+  position: relative; /* anchor for the badge */
+  background: #e68900;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+  font-size: 24px;
+  transition: background 0.3s ease;
+}
+
+.cart-toggle:hover {
+  background: #aa6601;
+}
+
+.cart-badg {
+  position: absolute;
+  top: -6px;   /* stick to top-right of button */
+  right: -6px;
+  background: rgb(253, 37, 37);
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* so badge doesn't block clicks */
+}
+
+
+.cart-badg {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: rgb(253, 37, 37);
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+
+  /* Fancy bounce animation */
+  animation: bounce-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes bounce-pop {
+  0%   { transform: scale(0.5); opacity: 0.6; }
+  40%  { transform: scale(1.4); opacity: 1; }
+  60%  { transform: scale(0.9); }
+  80%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}

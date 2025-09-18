@@ -1,0 +1,162 @@
+/* search bar */
+
+.menu-search {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  font-size: 16px;
+  height: 40px;
+  margin-top: 90px;
+  margin-right: 60px;
+  background-color: #2a2f36;   /* dark grey to match background */
+  color: #fff;                 /* white text */
+  width: 0;
+  opacity: 0;
+transition: all 0.3s ease-in-out;
+}
+
+.menu-search:focus {
+  border-color: #ff9800;       /* orange highlight */
+  box-shadow: 0 0 6px rgba(255, 152, 0, 0.6);
+  outline: none;
+}
+
+.no-results {
+  color: #ff6f61;              /* soft red for warnings */
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+.search-wrapper input.menu-search {
+  width: 250px;
+  opacity: 1;
+}
+
+
+
+.search-wrapper {
+  position: relative;
+  display: flex;              /* flex layout */
+  align-items: center;        /* vertical alignment */
+  gap: 8px;                   /* spacing between icon & input */
+  height: 50px;
+  top: 100px;
+  margin-right: -330px;
+}
+
+/* ///////////////filter/////////// */
+.menu-filters {
+  display: flex;
+  gap: 15px;
+  margin-top: 150px;
+  margin-bottom: 20px;
+  height: 40px;
+  margin-right: 40px;
+    border: 1px solid wheat;
+    border-radius: 8px;
+    margin-left: -2px;
+
+}
+
+.filter-dropdown {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background-color: #2a2f36;   /* dark grey */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-dropdown:hover {
+  border-color: #ff9800;       /* orange hover border */
+  background-color: #3a3f47;   /* lighter grey */
+}
+
+.filter-dropdown:focus {
+  outline: none;
+  border-color: #ff5722;       /* stronger orange/red focus */
+  box-shadow: 0 0 6px rgba(255, 87, 34, 0.6);
+}
+
+.no-items-message {
+  text-align: center;
+  font-size: 24px;
+  color: #ff5722;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 30px;
+  animation: pulse 1.5s infinite;
+}
+
+/* Optional: add a card-like container */
+.filter-notice {
+  border: 2px solid #ff5722;
+  width: 400px;
+  max-width: 90%;
+  padding: 20px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #1e2228, #2a2f36);
+  color: #ffcc80;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  margin: 50px auto;
+  text-align: center;
+}
+
+/* Add subtle pulse animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+/* Optional emoji or icon inside the container */
+.filter-notice::before {
+  content: "We are Sorry😔";
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+
+/* search icon button */
+.search-icon-btn {
+   border: none;
+margin-top: 90px;
+margin-right: -80px;
+  background: none;
+  border: 1px solid wheat;
+  cursor: pointer;
+  font-size: 20px;
+  color: #f7f1f1;
+  background-color: #2a2f36;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.search-icon-btn:hover {
+  border-color: #ff9800;
+  background-color: #3a3f47;
+}

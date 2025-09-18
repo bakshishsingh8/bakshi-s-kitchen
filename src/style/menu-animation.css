@@ -1,0 +1,299 @@
+
+/* ===== Ultra Attractive Entrance Animation (fixed) ===== */
+@keyframes cardShowUp {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) rotateY(-60deg) scale(0.6) translateY(50px);
+    filter: blur(6px) brightness(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: perspective(800px) rotateY(15deg) scale(1.05) translateY(-8px);
+    filter: blur(0) brightness(1.2);
+  }
+  70% {
+    transform: perspective(800px) rotateY(-5deg) scale(0.98) translateY(4px);
+  }
+  100% {
+    opacity: 1; /* stay visible */
+    transform: perspective(800px) rotateY(0) scale(1) translateY(0);
+    filter: none;
+  }
+}
+
+.menu-card {
+  animation: cardShowUp 1s cubic-bezier(0.25, 1.3, 0.5, 1) forwards;
+  opacity: 0; /* start hidden */
+  position: relative;
+  overflow: hidden;
+  animation-fill-mode: forwards; /* ✅ keeps final state */
+}
+
+/* Glow sweep */
+.menu-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: skewX(-25deg);
+}
+
+.menu-card.animated::after {
+  animation: shine 1.2s ease forwards;
+  animation-delay: 1s;
+}
+
+@keyframes shine {
+  100% {
+    left: 150%;
+  }
+}
+
+/* Staggered sequence */
+.menu-card:nth-child(1) { animation-delay: 0.15s; }
+.menu-card:nth-child(2) { animation-delay: 0.3s; }
+.menu-card:nth-child(3) { animation-delay: 0.45s; }
+.menu-card:nth-child(4) { animation-delay: 0.6s; }
+.menu-card:nth-child(5) { animation-delay: 0.75s; }
+
+
+/* /////////////////////////////////////////////////// */
+
+/* ===== SUPER ATTRACTIVE HOVER ===== */
+.menu-card {
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  /* Add this */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 3D hover tilt */
+.menu-card:hover {
+  transform: perspective(1000px) rotateX(8deg) rotateY(-8deg) scale(1.07);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6),
+              0 0 25px rgba(255, 215, 0, 0.4); /* golden glow */
+}
+
+/* Content to show on hover */
+.menu-details {
+  position: absolute; /* positioned over the card */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Align content to the bottom */
+  align-items: center;
+  text-align: center;
+  opacity: 0; /* starts hidden */
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 5;
+}
+
+.menu-card:hover .menu-details {
+  opacity: 1; /* becomes visible on hover */
+  visibility: visible;
+}
+
+.menu-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.menu-details p {
+  font-size: 1rem;
+}
+
+/* Ensure buttons are on top of everything else on hover */
+.menu-card:hover .menu-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-actions {
+  position: absolute;
+  bottom: 20px;
+  opacity: 0; /* starts hidden */
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 10;
+  
+  display: flex; /* Ensure these are flex children */
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px; /* Not needed here */
+}
+
+/* The original menu-info should be hidden */
+.menu-card .menu-info {
+    transition: opacity 0.3s ease;
+}
+
+.menu-card:hover .menu-info {
+    opacity: 0;
+}
+
+
+/* ////////////////////////////////////////////////0000000000000000000000000000000000000000000000000000000000 */
+
+
+
+/* Other CSS remains the same */
+
+/* ==================================== */
+/* ===== SUPER ATTRACTIVE HOVER (Revised) ===== */
+/* ==================================== */
+
+.menu-card {
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 3D hover tilt */
+.menu-card:hover {
+  transform: perspective(1000px) rotateX(8deg) rotateY(-8deg) scale(1.07);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
+              0 0 25px rgba(255, 215, 0, 0.4); /* golden glow */
+              border: 4px solid rgb(151, 128, 2);
+}
+
+/* Content to show on hover */
+.menu-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* This is the key change: background gradient and alignment */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Aligns content to the TOP */
+  align-items: center;
+  text-align: center;
+  gap: 15px; /* Adds space between the description and buttons */
+  opacity: 0; /* starts hidden */
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 5;
+}
+
+.menu-card:hover .menu-details {
+  opacity: 1; /* becomes visible on hover */
+  visibility: visible;
+}
+
+.menu-details h3 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.menu-details p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Ensure original menu-info is hidden on hover */
+.menu-card .menu-info {
+  transition: opacity 0.3s ease;
+}
+
+.menu-card:hover .menu-info {
+  opacity: 0;
+}
+
+
+
+/* ==================================== */
+/* ===== BUTTONS AND BADGE STYLING ===== */
+/* ==================================== */
+
+/* Now just a simple flex container */
+.menu-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+/* Button styles */
+.add-btn, .remove-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.add-btn {
+  background: #ff9800; /* Orange */
+}
+
+.remove-btn {
+  background: #595858; /* grey */
+  margin-left: 5px;
+}
+
+.add-btn:hover {
+  background: #f57c00;
+  transform: scale(1.05);
+}
+
+.remove-btn:hover {
+  background: #3d3d3d;
+  transform: scale(1.05);
+}
+
+/* Quantity Badge */
+.item-qty-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #f10905;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+/* // */

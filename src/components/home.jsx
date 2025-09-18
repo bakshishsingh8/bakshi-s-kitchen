@@ -12,7 +12,6 @@ function Home() {
                 
                 <h1>Your Favorite Spot for <br />Delicious Moments.</h1>
                 <p>“Delicious recipes, cooked with love in every bite.”<br />“Hit the order button to pick your favorite dishes.”</p><br />
-               {/* <Link to="/CC"><button>Learn More</button></Link> */}
             </div>
             
            
