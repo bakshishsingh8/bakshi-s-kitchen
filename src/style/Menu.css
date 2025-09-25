@@ -204,7 +204,7 @@ z-index: 10;
   margin-left: -10px;
   margin-top: 130px;
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp14AZm5T-GCK34hmPuPgs00bWmJdG3ZtfOQ&s');
-  border: 2px solid rgb(7, 7, 7);
+  /* border: 2px solid rgb(7, 7, 7); */
 }
 
 /* Entry Animation */

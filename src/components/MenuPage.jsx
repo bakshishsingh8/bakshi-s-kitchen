@@ -1,11 +1,14 @@
-
-  /////////////////////
-  import { useEffect, useState, useRef } from "react";
+// /////////////////////////////
+import { useEffect, useState, useRef } from "react";
 import { Search } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { storeWholeValue, removeItem, clearCart } from "../redux/counter/counterSlice";
-import { getGeminiSuggestion } from "../gamini.js"; // your API function
+import {
+  storeWholeValue,
+  removeItem,
+  clearCart,
+} from "../redux/counter/counterSlice";
+import { getGeminiSuggestion } from "../gamini.js";
 import "../style/Menu.css";
 import "../style/search-filter.css";
 import "../style/menu-animation.css";
@@ -24,19 +27,10 @@ export default function MenuPage() {
 
   const searchRef = useRef(null);
 
-  // Close search bar on outside click
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
-        setSearchOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
+  // --- Static Menus
   const menus = {
-    1: [
+
+     1: [
       { id: 1, childId: "1-1", name: "Cheese Burger", price: 120, img: "https://img.freepik.com/free-photo/classic-cheese-burger-with-beef-cutlet-vegetables-onions-isolated-white-background_123827-29709.jpg?semt=ais_hybrid&w=740&q=80", description: "Juicy beef patty with melted cheese, fresh lettuce, and sauces." },
       { id: 2, childId: "1-2", name: "French Fries", price: 80, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzt8lCFiXLokm_zxL9pDOzt3qWCslRXBR8Zg&s", description: "Crispy golden fries with a pinch of salt." },
       { id: 3, childId: "1-3", name: "Spring Roll", price: 50, img: "https://redhousespice.com/wp-content/uploads/2021/12/whole-spring-rolls-and-halved-ones-scaled.jpg", description: "Crunchy rolls stuffed with veggies and spices." },
@@ -60,12 +54,12 @@ export default function MenuPage() {
       { id: 1, childId: "3-1", name: "Paneer Butter Masala", price: 180, img: "https://www.cookwithmanali.com/wp-content/uploads/2019/05/Paneer-Butter-Masala.jpg", description: "Creamy tomato-based curry with soft paneer cubes, mildly spiced and rich in flavor." },
       { id: 2, childId: "3-2", name: "Dal Tadka", price: 150, img: "https://www.cookwithmanali.com/wp-content/uploads/2014/08/Dal-Tadka-500x375.jpg", description: "Yellow lentils tempered with ghee, garlic, and aromatic spices." },
       { id: 3, childId: "3-3", name: "Roti", price: 20, img: "https://static.toiimg.com/thumb/75542650.cms?imgsize=2236995&width=800&height=800", description: "Soft whole wheat flatbread, perfect to pair with curries." },
-      { id: 4, childId: "3-4", name: "Malai Kofta", price: 200, img: "https://tse1.mm.bing.net/th/id/OIP.uxz1bkgARi-fzT7qninxeAHaE8?pid=Api&P=0&h=180", description: "Fried paneer and potato dumplings served in a rich, creamy gravy." }, { id: 5, childId: "3-5", name: "Palak Paneer", price: 250, img: "https://www.yummytummyaarthi.com/wp-content/uploads/2021/11/palak-paneer-1.jpg", description: "Paneer cubes cooked in smooth spinach gravy with Indian spices." },
+      { id: 4, childId: "3-4", name: "Malai Kofta", price: 200, img: "https://tse1.mm.bing.net/th/id/OIP.uxz1bkgARi-fzT7qninxeAHaE8?pid=Api&P=0&h=180", description: "Fried paneer and potato dumplings served in a rich, creamy gravy." }, 
+      { id: 5, childId: "3-5", name: "Palak Paneer", price: 250, img: "https://www.yummytummyaarthi.com/wp-content/uploads/2021/11/palak-paneer-1.jpg", description: "Paneer cubes cooked in smooth spinach gravy with Indian spices." },
       { id: 6, childId: "3-6", name: "Chole Bhature", price: 50, img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Chole_Bhature_from_Nagpur.JPG", description: "Spiced chickpea curry served with deep-fried fluffy bread." },
       { id: 7, childId: "3-7", name: "Dahi Vada", price: 180, img: "https://www.cubesnjuliennes.com/wp-content/uploads/2020/06/Soft-Dahi-Vada-Recipe.jpg", description: "Soft lentil dumplings soaked in yogurt, topped with chutneys and spices." },
       { id: 8, childId: "3-8", name: "Avial", price: 150, img: "https://www.vegrecipesofindia.com/wp-content/uploads/2011/11/avial-recipe-11.jpg", description: "Kerala-style mixed vegetable curry cooked with coconut and yogurt." }
     ],
-
     4: [
       { id: 1, childId: "4-1", name: "Margherita Pizza", price: 250, img: "https://recipes.heart.org/-/media/AHA/Recipe/Recipe-Images/Classic-Margherita-Pizza-with-Whole-Wheat-Pizza-Crust.jpg?sc_lang=en&hash=8669621DF39E46A90612215CFACFE313", description: "Classic pizza topped with fresh mozzarella, basil, and tomato sauce." },
       { id: 2, childId: "4-2", name: "White Sauce Pasta", price: 200, img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2024/04/white-sauce-pasta.jpg", description: "Creamy pasta tossed in rich béchamel sauce with herbs." },
@@ -76,7 +70,6 @@ export default function MenuPage() {
       { id: 7, childId: "4-7", name: "Risotto alla Milanese", price: 250, img: "https://cookingitalians.com/wp-content/uploads/2024/11/Risotto-alla-Milanese.jpg", description: "Creamy risotto flavored with saffron and Parmesan cheese." },
       { id: 8, childId: "4-8", name: "Gnocchi", price: 150, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSESCaSZyfowShkt3h-MxRPzbuEATseHIosAg&s", description: "Soft potato dumplings served with choice of sauce." }
     ],
-
     5: [
       { id: 1, childId: "5-1", name: "Grilled Fish", price: 350, img: "https://static01.nyt.com/images/2021/08/18/dining/20Porgyrex1/12Porgyrex2-jumbo.jpg", description: "Fresh fish marinated with spices and grilled to perfection." },
       { id: 2, childId: "5-2", name: "Prawns Curry", price: 400, img: "https://glebekitchen.com/wp-content/uploads/2021/10/southindianprawncurrytopbowl.jpg", description: "Juicy prawns simmered in a spicy coconut-based curry." },
@@ -87,7 +80,6 @@ export default function MenuPage() {
       { id: 7, childId: "5-7", name: "Cioppino", price: 350, img: "https://bertolli.com/wp-content/uploads/2017/07/CioppinoAllaArrabbiata-d.jpg", description: "Italian-American seafood stew with fish, shellfish, and tomato broth." },
       { id: 8, childId: "5-8", name: "Moqueca", price: 400, img: "https://static01.nyt.com/images/2016/03/16/dining/16MOQUECA/16MOQUECA-superJumbo.jpg", description: "Brazilian seafood stew made with coconut milk and spices." }
     ],
-
     6: [
       { id: 1, childId: "6-1", name: "Tandoori Chicken", price: 300, img: "https://www.easycookingwithmolly.com/wp-content/uploads/2023/11/air-fryer-whole-tandoori-chicken-3-480x480.jpg", description: "Chicken marinated in yogurt and spices, roasted in a clay oven." },
       { id: 2, childId: "6-2", name: "Chicken Biryani", price: 280, img: "https://www.licious.in/blog/wp-content/uploads/2022/06/chicken-hyderabadi-biryani-01.jpg", description: "Fragrant basmati rice cooked with marinated chicken and spices." },
@@ -98,34 +90,61 @@ export default function MenuPage() {
       { id: 7, childId: "6-7", name: "Butter Chicken", price: 350, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_sZZjpyR1dUFAMRo5b7BzEIaPWLaDk0UUdA&s", description: "Succulent chicken cooked in creamy tomato-based sauce." },
       { id: 8, childId: "6-8", name: "Mutton Keema", price: 400, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKgit9mwVqlhFCYyyG8CBIWTh6GciXNxN9kw&s", description: "Minced mutton slow-cooked with spices and herbs." }
     ]
+   
   };
 
-
-  // Fetch API (dynamic) data from Gemini
+  // --- Close search bar on outside click
   useEffect(() => {
-    setLoading(true);
-    async function fetchMenus() {
-      try {
-        // const dynamicMenus = await getGeminiSuggestion("Tell me the famous food of india");
-        // console.log(dynamicMenus);
-        // if (dynamicMenus && Array.isArray(dynamicMenus) && dynamicMenus.length > 0) {
-        //   setMenu(dynamicMenus);
-        // } 
-        // else {
-        //   setMenu(menus[categoryId] || []);
-        // }
-                  setMenu(menus[categoryId] || []);
-
-      } catch (err) {
-        console.error(err);
-        setMenu(menus[categoryId] || []);
-      } finally {
-        setLoading(false);
+    function handleClickOutside(e) {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setSearchOpen(false);
       }
     }
-    fetchMenus();
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // --- Load menu for category by default
+  useEffect(() => {
+    setLoading(true);
+    setMenu(menus[categoryId] || []);
+    setLoading(false);
     window.scrollTo(0, 0);
   }, [categoryId]);
+
+  // --- Handle Search (Gemini + fallback)
+  useEffect(() => {
+    if (!searchTerm.trim()) {
+      setMenu(menus[categoryId] || []);
+      return;
+    }
+
+    const delayDebounce = setTimeout(async () => {
+      setLoading(true);
+      // const dynamicMenus = await getGeminiSuggestion(searchTerm);
+
+      // if (dynamicMenus.length > 0) {
+      //   setMenu(dynamicMenus);
+      // } else {
+      //   // fallback to static filter
+      //   const filtered = (menus[categoryId] || []).filter(
+      //     (item) =>
+      //       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      //       item.description.toLowerCase().includes(searchTerm.toLowerCase())
+      //   );
+      //   setMenu(filtered);
+      // }
+       const filtered = (menus[categoryId] || []).filter(
+          (item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.description.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setMenu(filtered);
+      setLoading(false);
+    }, 500); // debounce
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchTerm, categoryId]);
 
   const categoryNames = {
     1: "Fast Food",
@@ -136,6 +155,7 @@ export default function MenuPage() {
     6: "Mughlai Food",
   };
 
+  // --- Add to cart with animation
   const handleAddWithAnimation = (menuItem, e) => {
     const img = e.currentTarget.closest(".menu-card").querySelector("img");
     const cart = document.querySelector("#cart-icon");
@@ -243,6 +263,7 @@ export default function MenuPage() {
     });
   }
 
+
   return (
     <div className="menu-background">
       <div className="cards-main">
@@ -251,7 +272,10 @@ export default function MenuPage() {
           <br />
           <div className="search-wrapper" ref={searchRef}>
             {!searchOpen ? (
-              <button className="search-icon-btn" onClick={() => setSearchOpen(true)}>
+              <button
+                className="search-icon-btn"
+                onClick={() => setSearchOpen(true)}
+              >
                 <Search size={22} />
               </button>
             ) : (
@@ -266,7 +290,11 @@ export default function MenuPage() {
             )}
           </div>
           <div className="menu-filters">
-            <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)} className="filter-dropdown">
+            <select
+              value={priceFilter}
+              onChange={(e) => setPriceFilter(e.target.value)}
+              className="filter-dropdown"
+            >
               <option value="">Filter by Price</option>
               <option value="low">Low (&lt;100)</option>
               <option value="medium">Medium (100-300)</option>
@@ -280,10 +308,17 @@ export default function MenuPage() {
             <p>Loading...</p>
           ) : filteredMenus.length > 0 ? (
             filteredMenus.map((menuItem, i) => {
-              const existing = cartItems.find((f) => f.childId === menuItem.childId);
+              const existing = cartItems.find(
+                (f) => f.childId === menuItem.childId
+              );
+              // console.log(menuItem);
               return (
                 <div className="menu-card" key={`${menuItem.name}-${i}`}>
-                  <img src={menuItem.img} alt={menuItem.name} className="menu-image" />
+                  <img
+                    src={menuItem.img}
+                    alt={menuItem.name}
+                    className="menu-image"
+                  />
                   <div className="menu-info">
                     <h3 className="menu-name">{menuItem.name}</h3>
                     <p className="menu-price">₹{menuItem.price}</p>
@@ -292,11 +327,24 @@ export default function MenuPage() {
                     <h3>{menuItem.name}</h3>
                     <p>{menuItem.description}</p>
                     <div className="menu-actions">
-                      <button className="add-btn" onClick={(e) => handleAddWithAnimation(menuItem, e)}>
-                        +{existing && <span className="item-qty-badge">{existing.quantity}</span>}
+                      <button
+                        className="add-btn"
+                        onClick={(e) => handleAddWithAnimation(menuItem, e)}
+                      >
+                        +
+                        {existing && (
+                          <span className="item-qty-badge">
+                            {existing.quantity}
+                          </span>
+                        )}
                       </button>
                       {existing && (
-                        <button className="remove-btn" onClick={(e) => handleRemoveWithAnimation(menuItem, e)}>
+                        <button
+                          className="remove-btn"
+                          onClick={(e) =>
+                            handleRemoveWithAnimation(menuItem, e)
+                          }
+                        >
                           –
                         </button>
                       )}
@@ -315,3 +363,4 @@ export default function MenuPage() {
     </div>
   );
 }
+

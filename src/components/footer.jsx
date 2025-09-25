@@ -1,4 +1,3 @@
-import React from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../style/Footer.css";
 
@@ -19,7 +18,7 @@ export default function Footer() {
           <h3>Quick Links</h3>
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/menu">Menu</a></li>
+            {/* <li><a href="//menu/:id">Menu</a></li> */}
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
@@ -36,10 +35,10 @@ export default function Footer() {
         {/* Social Icons */}
         <div className="footer-section social-icons">
           <h3>Follow Us</h3>
-          <a href="#"><i className="fab fa-facebook-f"></i></a>
-          <a href="#"><i className="fab fa-instagram"></i></a>
-          <a href="#"><i className="fab fa-twitter"></i></a>
-          <a href="#"><i className="fab fa-youtube"></i></a>
+          <a href="https://www.facebook.com/"><i className="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/"><i className="fab fa-instagram"></i></a>
+          <a href="https://x.com/?lang=en"><i className="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com"><i className="fab fa-youtube"></i></a>
         </div>
       </div>
 

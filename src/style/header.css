@@ -274,5 +274,7 @@ body {
   background: #45a049;
 }
 
+.logout-btn{
+  cursor: pointer;
+}
 /* ////////////////////////////////////// */
-

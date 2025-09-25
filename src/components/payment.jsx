@@ -1,12 +1,16 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../redux/auth/authSlice"; // ✅ import login action
+// import { login } from "../redux/auth/authSlice"; 
+import { clearCart } from "../redux/counter/counterSlice"; // ✅ import clearCart
 import "../style/payment.css";
+import { Button, message } from "antd";
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState("card");
-  const [showPopup, setShowPopup] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const cartItems = useSelector((state) => state.counter?.foodItem || []);
   const isAuthenticated = useSelector((state) => state.auth?.isAuthenticated);
@@ -14,17 +18,15 @@ function Payment() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // ✅ Check localStorage & restore Redux before redirecting
+  // ✅ Restore Redux from localStorage
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-
-    if (token) {
-      if (!isAuthenticated) {
-        // Restore Redux login from token
-        dispatch(login({ email: "saved@email.com" }));
-      }
+    const storedUser = (localStorage.getItem("authToken"));
+    if (storedUser) {
+      // if (!isAuthenticated) {
+        // dispatch(login({ email: storedUser.email }));
+      // }
     } else {
-      // No token → force login
+      console.log("No token found, redirecting to login.");
       navigate("/login");
     }
   }, [dispatch, isAuthenticated, navigate]);
@@ -36,15 +38,36 @@ function Payment() {
 
   const isCartEmpty = cartItems.length === 0;
 
+  // ✅ Handle Payment
   const handleConfirmPayment = () => {
+    let token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
     if (!isCartEmpty) {
-      setShowPopup(true);
-      setTimeout(() => setShowPopup(false), 3000);
+      messageApi.open({
+        type: "success",
+        content: "🎉 Payment Successful!",
+        className: "custom-class"
+      });
+
+      // ✅ Clear cart after successful payment
+      dispatch(clearCart());
+
+      // ✅ Redirect after a short delay
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
   };
+  console.log("Payment component rendered. Cart items:");
 
   return (
     <div className="payment-container">
+      {contextHolder}
+
       <div className="payment-card">
         <h2 className="text-2xl font-bold text-white-800 mb-6 text-center">
           Bakshi's Kitchen - Payment
@@ -82,7 +105,7 @@ function Payment() {
             <h3>Select Payment Method</h3>
             <div className="space-y-3">
 
-              <div className="radio-input">
+              <label className="radio-input flex items-center gap-2 cursor-pointer">
                 <input
                   type="radio"
                   name="payment"
@@ -90,11 +113,10 @@ function Payment() {
                   checked={paymentMethod === "card"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
-                 <p className="p-input">Credit / Debit Card</p>
-              </div>
+                <span className="p-input">Credit / Debit Card</span>
+              </label>
 
-
-              <div className="radio-input">
+              <label className="radio-input flex items-center gap-2 cursor-pointer">
                 <input
                   type="radio"
                   name="payment"
@@ -102,11 +124,10 @@ function Payment() {
                   checked={paymentMethod === "upi"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
-                <p className="p-input"> UPI (Google Pay / PhonePe / Paytm)</p>
-              </div>
+                <span className="p-input">UPI (Google Pay / PhonePe / Paytm)</span>
+              </label>
 
-
-              <div className="radio-input">
+              <label className="radio-input flex items-center gap-2 cursor-pointer">
                 <input
                   type="radio"
                   name="payment"
@@ -114,8 +135,8 @@ function Payment() {
                   checked={paymentMethod === "cod"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
-               <p className="p-input"> Cash on Delivery</p>
-              </div>
+                <span className="p-input">Cash on Delivery</span>
+              </label>
 
             </div>
           </div>
@@ -140,21 +161,17 @@ function Payment() {
           </div>
         )}
 
-        <button
+        <Button
+          type="primary"
           disabled={isCartEmpty}
           className="confirm-btn"
-          onClick={handleConfirmPayment}
+          onClick={()=>handleConfirmPayment()}
         >
           Confirm Payment
-        </button>
-
-        {showPopup && (
-          <div className="payment-popup">🎉 Thank you for your payment!</div>
-        )}
+        </Button>
       </div>
     </div>
   );
 }
 
 export default Payment;
-

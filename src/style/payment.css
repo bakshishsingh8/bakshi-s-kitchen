@@ -75,6 +75,7 @@
   background: rgba(255, 255, 255, 0.15);
   cursor: pointer;
   transition: all 0.3s ease;
+  
 }
 
 /* Hover Effect */
@@ -97,6 +98,7 @@
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
+  margin-top: -12px;
   color: #1f2937;
 }
 
@@ -136,6 +138,7 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  height: 50px;
 }
 
 .confirm-btn:disabled {
@@ -154,7 +157,7 @@
 }
 
 /* ===== Popup Message ===== */
-.payment-popup {
+.custom-class {
   background: rgba(240, 253, 244, 0.95);
   border: 2px solid #22c55e;
   color: #166534;
@@ -162,4 +165,12 @@
   padding: 1.5rem 2rem;
   border-radius: 1rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 20pc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 596px;
+  /* margin-top: -200px; */
 }
+
+

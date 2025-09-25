@@ -50,7 +50,9 @@ const Signup = () => {
       <div className="signup-container">
         {/* Left Image Section */}
         <div className="signup-image">
-          <button className="back-btn">Back to website →</button>
+          <button className="back-btn" onClick={() => navigate("/")}>
+            Back to Home →
+          </button>
           <img src={sidephoto} alt="background" />
         </div>
 

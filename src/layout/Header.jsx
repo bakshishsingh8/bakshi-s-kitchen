@@ -179,7 +179,7 @@ function Navbar() {
           {/* ✅ Show Logout when logged in */}
           {isAuthenticated && (
             <button
-              className="logout-btn bg-red-500 text-white px-4 py-2 rounded-lg ml-3"
+              className="logout-btn bg-red-500 text-white px-4 py-2 rounded-lg ml-3 "
               onClick={handleLogout}
             >
               Logout
@@ -259,7 +259,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-
-
-

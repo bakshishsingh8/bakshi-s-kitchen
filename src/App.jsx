@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+
+import {  useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Signup from "./pages/sign-up.jsx";
 import Login from "./pages/login.jsx";
@@ -11,28 +12,24 @@ import "./App.css";
 import Navbar from "./layout/Header.jsx";
 import About from "./components/about.jsx";
 import Payment from "./components/payment.jsx";
-import { login } from "./redux/auth/authSlice"; // ✅ import login action
-import CommonAPI from "./APIs/CommonAPi.jsx";
+import { login } from "./redux/auth/authSlice";
 
 // ✅ PrivateRoute Component
 function PrivateRoute({ children }) {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const token = localStorage.getItem("authToken"); // check token from storage
-
-  return isAuthenticated && token ? children : <Navigate to="/login" replace />;
+  const storedUser =localStorage.getItem("authToken");
+  console.log(storedUser,'get stre')
+  return storedUser ? children : <Navigate to="/login" replace />;
 }
 
 export default function App() {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  // ✅ On app load, sync Redux with localStorage token
+  // ✅ On app load, sync Redux with localStorage user
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      // If token exists, set Redux auth state
-      dispatch(login({ email: "user@email.com" })); 
-      // you can later decode token or fetch profile instead of hardcoding
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser?.token) {
+      dispatch(login({ email: storedUser.email }));
     }
   }, [dispatch]);
 
@@ -52,7 +49,7 @@ export default function App() {
         <Route path="/menu/:id" element={<MenuPage />} />
         <Route path="/about" element={<About />} />
 
-        {/* ✅ Protect Payment Page */}
+        {/* ✅ Protected Payment Page */}
         <Route
           path="/payment"
           element={
@@ -62,7 +59,6 @@ export default function App() {
           }
         />
       </Routes>
-        <CommonAPI/>
 
       {!hideLayout && <Footer />}
     </CartProvider>

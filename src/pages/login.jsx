@@ -26,7 +26,7 @@ const Login = () => {
 
   const togglePassword = () => setShowPassword(!showPassword);
 
-   // ✅ Handle login
+  //  // ✅ Handle login
   const onSubmit = async (data) => {
     try {
       // Simulate backend call → normally you'd fetch token from API
@@ -55,11 +55,10 @@ const Login = () => {
     }
   }, [navigate]);
 
-
   return (
     <div className="Login-background">
       <div className="Login-container">
-        
+
         {/* Left Image Section */}
         <div className="Login-image">
           <button className="back-btn" onClick={() => navigate("/")}>
@@ -115,5 +114,4 @@ const Login = () => {
 };
 
 export default Login;
-
 
